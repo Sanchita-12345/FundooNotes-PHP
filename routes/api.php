@@ -32,9 +32,3 @@ Route::group([
     Route::post('sendPasswordResetLink', 'App\Http\Controllers\PasswordResetRequestController@sendEmail');
     Route::post('resetPassword', 'App\Http\Controllers\ChangePasswordController@passwordResetProcess');
 });
-/*
-Route::middleware(['api'])->group(function($router){
-    Route::post('password/email', 'ForgotPasswordController@forgot');
-    Route::post('password/reset', 'ForgotPasswordController@reset');
-});
-*/
