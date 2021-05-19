@@ -34,6 +34,7 @@ class NoteController extends Controller
         //$notes->id = $request->input('id');
         $notes->title = $request->input('title');
         $notes->description = $request->input('description');
+        $notes->user_id = auth()->id();
         $notes->save();
         return new NoteResource($notes);
     }
@@ -48,7 +49,8 @@ class NoteController extends Controller
     {
         //get specific product record by id
         $notes = Notes::findOrFail($id);
-        return new NoteResource($notes);
+        if($notes->user_id == auth()->id())
+            return new NoteResource($notes);
     }
 
     /**
@@ -62,10 +64,12 @@ class NoteController extends Controller
     {
         $notes = Notes::findOrFail($id);
         //$notes->id = $request->input('id');
-        $notes->title = $request->input('title');
-        $notes->description = $request->input('description');
-        $notes->save();
-        return new NoteResource($notes);
+        if($notes->user_id==auth()->id()){
+            $notes->title = $request->input('title');
+            $notes->description = $request->input('description');
+            $notes->save();
+            return new NoteResource($notes);
+        }
     }
 
     /**
@@ -78,8 +82,10 @@ class NoteController extends Controller
     {
         //delete a specific product record by id
         $notes = Notes::findOrFail($id);
-        if($notes->delete()){
-            return new NoteResource($notes);
+        if($notes->user_id==auth()->id()){
+            if($notes->delete()){
+                return new NoteResource($notes);
+            }
         }
     }
 }
