@@ -5,10 +5,18 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Notes;
 use Validator;
-
+use guard;
+use Illuminate\Support\Facades\Password;
+use Symfony\Component\Mime\Message;
+use Symfony\Component\HttpFoundation\Response;
+use Tymon\JWTAuth\Claims\Subject;
+use Exception;
+use App\Http\Controllers\PasswordResetRequestController;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Database\Eloquent\Model;
 //use Tymon\JWTAuth\JWTAuth;
 
 class AuthController extends Controller
@@ -18,9 +26,9 @@ class AuthController extends Controller
      *
      * @return void
      */
-    // public function __construct() {
-    //     $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    // }
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    }
 
     // /**
     //  * Get a JWT via given credentials.

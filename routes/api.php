@@ -10,6 +10,7 @@ use App\Http\Controllers\PasswordResetRequestController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\UpdatePwdController;
+use Illuminate\Auth\Events\Login;
 
 
 /*
@@ -31,10 +32,10 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-    // Route::post('/login', [AuthController::class, 'login']);
-    // Route::post('/register', [AuthController::class, 'register']);
-    // Route::post('sendPasswordResetLink', 'App\Http\Controllers\PasswordResetRequestController@sendEmail');
-    // Route::post('resetPassword', 'App\Http\Controllers\ChangePasswordController@passwordResetProcess');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('sendPasswordResetLink', 'App\Http\Controllers\PasswordResetRequestController@sendEmail');
+    Route::post('resetPassword', 'App\Http\Controllers\ChangePasswordController@passwordResetProcess');
 
 
 });
@@ -75,3 +76,16 @@ Route::put('/notes/{id}', [
 Route::delete('/notes/{id}', [
     NoteController::class, 'destroy'
 ])->middleware('auth.jwt');
+
+
+Route::delete('/deletenotelabel/{id}','LabelController@deleteNoteLabel');
+Route::post('/createnotelabel','LabelController@createNoteLabel');
+Route::get('/displaynotelabel/{id}','LabelController@displayNoteLabel');
+Route::get('/displayNote','NoteController@displayNote');
+
+
+
+Route::post('/createlabel','LabelController@createLabel');
+Route::delete('/deletelabel/{id}','LabelController@deleteLabel');
+Route::put('/editlabel','LabelController@editLabel');
+Route::get('/displaylabel','LabelController@displayLabel');

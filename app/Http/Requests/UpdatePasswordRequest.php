@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePasswordRequest extends FormRequest
 {
-    public $stopOnFirstFailure = true;
+    //public $stopOnFirstFailure = true;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class UpdatePasswordRequest extends FormRequest
     {
         return [
             'email'=>'required|email',
-             'password'=>'required|confirmed|regex:/^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{6,}$/'
+            'password'=>'required|confirmed|required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/'
         ];
     }
 }

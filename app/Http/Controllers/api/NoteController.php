@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Notes;
 use App\Http\Resources\Notes as NoteResource;
+use App\Models\User;
 class NoteController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class NoteController extends Controller
     {
         //get retrive all product records
         $notes = Notes::all();
-        return new NoteResource($notes);
+        return User::find($notes->user_id=auth()->id())->noteses;
     }
 
     /**
