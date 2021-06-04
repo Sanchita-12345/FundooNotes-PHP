@@ -44,9 +44,15 @@ class Notes extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+        //return $this->belongsToMany('\App\Model\Users','users_notes')->withPivot('id');
+
     }
     // public function labels()
     // {
     //     return $this->hasMany('App\Models\LabelsNotes', 'noteid');
     // }
+    public function labels()
+    {
+        return $this->belongsToMany('\App\Model\Label','label_notes')->withPivot('id');
+    }
 }

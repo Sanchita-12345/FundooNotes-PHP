@@ -11,6 +11,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\UpdatePwdController;
 use Illuminate\Auth\Events\Login;
+use App\Http\Controllers\LabelController;
 
 
 /*
@@ -89,3 +90,21 @@ Route::post('/createlabel','LabelController@createLabel');
 Route::delete('/deletelabel/{id}','LabelController@deleteLabel');
 Route::put('/editlabel','LabelController@editLabel');
 Route::get('/displaylabel','LabelController@displayLabel');
+
+
+
+Route::post('/createlabel', [
+    LabelController::class, 'createLabel'
+]);
+
+Route::delete('/deletelabel', [
+    LabelController::class, 'deleteLabel'
+]);
+
+Route::put('/editlabel', [
+    LabelController::class, 'editlabel'
+]);
+
+Route::get('/displaylabel', [
+    LabelController::class, 'displaylabel'
+]);
